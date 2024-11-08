@@ -10,7 +10,7 @@ export const TasksList = () => {
   const tasks = useAtomValue(tasksAtom);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ paddingVertical: 20 }}>
       <YStack padding={10} width="100%" maxWidth={900}>
         <Text
           color={"black"}

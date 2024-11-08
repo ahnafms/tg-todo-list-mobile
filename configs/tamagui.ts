@@ -26,24 +26,17 @@ const animations = createAnimations({
 });
 
 const headingFont = createInterFont();
-
 const bodyFont = createInterFont();
 
 const config = createTamagui({
-  light: {
-    color: {
-      background: "gray",
-      text: "black",
-    },
-  },
-  defaultFont: "body",
   animations,
-  shouldAddPrefersColorThemes: true,
-  themeClassNameOnRoot: true,
+  defaultTheme: "dark",
+  shouldAddPrefersColorThemes: false,
+  themeClassNameOnRoot: false,
   shorthands,
   fonts: {
-    body: bodyFont,
     heading: headingFont,
+    body: bodyFont,
   },
   themes,
   tokens,
@@ -60,13 +53,18 @@ const config = createTamagui({
     gtLg: { minWidth: 1280 + 1 },
     short: { maxHeight: 820 },
     tall: { minHeight: 820 },
+    hoverNone: { hover: "none" },
     pointerCoarse: { pointer: "coarse" },
   }),
 });
 
-type AppConfig = typeof config;
+export type AppConfig = typeof config;
 
 declare module "tamagui" {
+  interface TamaguiCustomConfig extends AppConfig {}
+}
+
+declare module "@tamagui/core" {
   interface TamaguiCustomConfig extends AppConfig {}
 }
 

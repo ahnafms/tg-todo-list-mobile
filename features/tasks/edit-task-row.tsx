@@ -13,7 +13,7 @@ export function EditTasksRow({ id, name, status }: taskTypes.Task) {
   const form = useForm<{ status: boolean }>({
     resolver: zodResolver(taskContracts.EditTaskSchema),
     defaultValues: {
-      status: false,
+      status: status === taskContracts.Status.FINISH,
     },
   });
 
@@ -35,22 +35,29 @@ export function EditTasksRow({ id, name, status }: taskTypes.Task) {
   };
 
   return (
-    <XStack justifyContent="space-around" alignItems="center" marginBottom={40}>
-      <View width={"25%"}>
+    <XStack
+      justifyContent="space-between"
+      alignItems="center"
+      marginBottom={40}
+      paddingHorizontal={16}
+      width="100%"
+    >
+      <View width="25%" justifyContent="center" alignItems="center">
         <Text
-          flex={2}
-          color={"black"}
+          color="black"
           fontWeight="bold"
           textDecorationLine={isChecked ? "line-through" : "none"}
           textAlign="center"
+          numberOfLines={1}
+          ellipsizeMode="tail"
         >
           {name}
         </Text>
       </View>
-      <View width={"25%"} alignContent="center" justifyContent="center">
+
+      <View width="25%" justifyContent="center" alignItems="center">
         <Text
-          flex={1}
-          color={"black"}
+          color="black"
           fontWeight="bold"
           textDecorationLine={isChecked ? "line-through" : "none"}
           textAlign="center"
@@ -59,29 +66,29 @@ export function EditTasksRow({ id, name, status }: taskTypes.Task) {
         </Text>
       </View>
 
-      <View width={"25%"} alignContent="center" justifyContent="center">
+      <View width="25%" justifyContent="center" alignItems="center">
         <Controller
           control={form.control}
           name="status"
           render={({ field }) => (
             <Checkbox
-              alignSelf="center"
               checked={field.value}
               onCheckedChange={(value) => {
                 field.onChange(value);
                 onSubmit(value as boolean);
               }}
+              size="$4"
             >
               <Checkbox.Indicator>
-                <CheckIcon />
+                <CheckIcon size={16} />
               </Checkbox.Indicator>
             </Checkbox>
           )}
         />
       </View>
 
-      <View width={"25%"}>
-        <Button onPress={onDelete} fontWeight="bold">
+      <View width="25%" justifyContent="center" alignItems="center">
+        <Button onPress={onDelete} fontWeight="bold" size="$3">
           Delete
         </Button>
       </View>
