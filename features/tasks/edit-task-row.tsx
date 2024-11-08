@@ -1,10 +1,10 @@
-import { XStack, Text, Checkbox, Button, View } from "tamagui";
+import { XStack, Text, Button, View } from "tamagui";
 import { Controller, useForm } from "react-hook-form";
+import { Switch } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSetAtom } from "jotai";
 import { updateTasksAtom, deleteTasksAtom } from "@/stores/tasks";
 import { taskContracts, taskTypes } from "@/entities/task";
-import { Check as CheckIcon } from "@tamagui/lucide-icons";
 
 export function EditTasksRow({ id, name, status }: taskTypes.Task) {
   const setUpdateTask = useSetAtom(updateTasksAtom);
@@ -17,14 +17,14 @@ export function EditTasksRow({ id, name, status }: taskTypes.Task) {
     },
   });
 
-  const { watch } = form;
+  const { watch, handleSubmit } = form;
   const isChecked = watch("status");
 
-  const onSubmit = (data: boolean) => {
+  const onSubmit = () => {
     setUpdateTask({
       id,
       name,
-      status: data
+      status: isChecked
         ? taskContracts.Status.FINISH
         : taskContracts.Status.ON_GOING,
     });
@@ -62,7 +62,7 @@ export function EditTasksRow({ id, name, status }: taskTypes.Task) {
           textDecorationLine={isChecked ? "line-through" : "none"}
           textAlign="center"
         >
-          {status ? "Completed" : "On going"}
+          {isChecked ? "Completed" : "On going"}
         </Text>
       </View>
 
@@ -71,24 +71,19 @@ export function EditTasksRow({ id, name, status }: taskTypes.Task) {
           control={form.control}
           name="status"
           render={({ field }) => (
-            <Checkbox
-              checked={field.value}
-              onCheckedChange={(value) => {
+            <Switch
+              value={field.value}
+              onValueChange={(value: boolean) => {
                 field.onChange(value);
-                onSubmit(value as boolean);
+                onSubmit();
               }}
-              size="$4"
-            >
-              <Checkbox.Indicator>
-                <CheckIcon size={16} />
-              </Checkbox.Indicator>
-            </Checkbox>
+            />
           )}
         />
       </View>
 
       <View width="25%" justifyContent="center" alignItems="center">
-        <Button onPress={onDelete} fontWeight="bold" size="$3">
+        <Button onPress={handleSubmit(onDelete)} fontWeight="bold" size="$3">
           Delete
         </Button>
       </View>
