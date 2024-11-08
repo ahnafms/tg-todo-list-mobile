@@ -1,50 +1,27 @@
-# Welcome to your Expo app 👋
+# To-do List Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a To-do list mobile application built with React Native. It allows users to create, edit, and delete tasks, providing a clean and responsive user interface. The app utilizes Tamagui for UI components, Jotai for state management, and follows a modular architecture to ensure scalability and maintainability.
 
-## Get started
+## Project Structure
 
-1. Install dependencies
+- **/app**: Entry point for the application, managing routes and pages.
+- **/component**: Contains UI components. I use Tamagui for UI elements such as buttons and forms.
+- **/config**: Stores library and framework configuration. This includes configuration for third-party libraries, constants, or environment-specific settings.
+- **/features**: The controller for task data. This folder contains logic for creating, editing, and deleting tasks.
+- **/entities**: Data models such as the Task entity, which includes properties like id, name.
+- **/lib**: Stores reusable helper function.
+- **/stores**: Manages the app's state using Jotai. It defines atoms to manage the global state of the app.
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- **Create Task**: Allows users to add new tasks.
+- **Edit Task**: Users can edit existing tasks.
+- **Delete Task**: Each task has a delete button to remove it from the list.
+- **Responsive Design**: The app works across different screen sizes, ensuring a consistent experience on both web and mobile.
 
-   ```bash
-    npx expo start
-   ```
+## Technologies Used
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **React Native**: For building the user interface.
+- **Tamagui**: For UI components such as buttons, forms, etc.
+- **Jotai**: For state management.
+- **Expo**: For cross-platform development tools and build
